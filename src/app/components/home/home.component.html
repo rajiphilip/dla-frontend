@@ -1,0 +1,52 @@
+<app-header></app-header>
+<div class="all-content-wrapper">
+  <app-main-header [mainPageTitle]="mainPageTitle"></app-main-header>
+  <div class="widget-program-box mg-tb-30">
+    <div class="container-fluid">
+      <div class="row" style="min-height: 66vh">
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="padding: 0 10px 20px 10px;"
+          *ngFor="let session of sessions">
+          <div class="hpanel responsive-mg-b-30">
+            <div class="panel-body">
+              <div class="content-box">
+                <div class="stats-title pull-left text-left">
+                  <small>Training Start</small>
+                  <p><strong>{{ session.training_start }}</strong></p>
+                </div>
+                <div class="stats-icon pull-right text-right">
+                  <small>Fees</small>
+                  <p><strong>&#8358; {{ session.fee }}</strong></p>
+                </div>
+                <div style="clear:both"></div>
+                <p>
+                  <small>
+                    Course
+                  </small><br />
+                  <strong>{{ session.course }}</strong>
+                </p>
+                <p>
+                  <small>
+                    Theme
+                  </small><br />
+                  <strong>{{ session.theme }}</strong>
+                </p>
+                <p>
+                  <small>
+                    Registration
+                  </small><br />
+                  <strong>{{ session.registration }}</strong>
+                </p>
+                <a *ngIf="checkPaid(session.course_id)" routerLink="/student-session/{{session.session_id}}"
+                  class="btn btn-primary btn-sm pull-right" style="color: #ffffff;">View</a>
+                <a *ngIf="!checkPaid(session.course_id)" routerLink="/student-session/{{session.session_id}}"
+                  class="btn btn-primary btn-sm pull-right" style="color: #ffffff;">Register</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

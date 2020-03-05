@@ -1,0 +1,114 @@
+<app-header></app-header>
+<div class="all-content-wrapper">
+  <app-main-header [mainPageTitle]="mainPageTitle"></app-main-header>
+  <div class="widget-program-box mg-tb-30">
+    <div class="container-fluid">
+      <div class="row" style="min-height: 66vh">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" style="padding: 0 10px 20px 10px;" *ngIf="session">
+          <div class="hpanel responsive-mg-b-30">
+            <div class="panel-body">
+              <div class="content-box">
+                <div class="stats-title pull-left text-left">
+                  <small>Training Start</small>
+                  <p><strong>{{ session.training_start }}</strong></p>
+                </div>
+                <div class="stats-icon pull-right text-right">
+                  <small>Fees</small>
+                  <p><strong>&#8358; {{ session.fee }}</strong></p>
+                </div>
+                <div style="clear:both"></div>
+                <p>
+                  <small>
+                    Course
+                  </small><br />
+                  <strong>{{ session.course }}</strong>
+                </p>
+                <p>
+                  <small>
+                    Theme
+                  </small><br />
+                  <strong>{{ session.theme }}</strong>
+                </p>
+                <p>
+                  <small>
+                    Registration
+                  </small><br />
+                  <strong>{{ session.registration }}</strong>
+                </p>
+
+                <button *ngIf="checkPaid(session.c_id)" class="btn btn-light btn-sm pull-left">Tag No -
+                  {{ session.tag_no}}</button>
+
+                <button *ngIf="checkPaid(session.c_id)" class="btn btn-light btn-sm pull-right">Matric No -
+                  {{userinfo.matric_number}}</button>
+
+                <button *ngIf="!checkPaid(session.c_id)" class="btn btn-light btn-sm pull-left"
+                  (click)="checkRegistrationStatus('offline')">Already Paid
+                  to Bank</button>
+                <button *ngIf="!checkPaid(session.c_id)" class="btn btn-primary btn-sm pull-right"
+                  (click)="checkRegistrationStatus('online')">Pay
+                  Online</button>
+                <button #payBtn class="btn btn-primary btn-sm pull-right" style="display: none;" angular4-paystack
+                  [key]="'pk_test_21a006ba15e2de1bb6d7bf0f18fbe09283060ac6'" [email]="my_email" [amount]="amount"
+                  [metadata]="metadata" [ref]="reference" [class]="'btn btn-primary'" (paymentInit)="paymentInit()"
+                  (close)="paymentCancel()" (callback)="paymentDone($event)">Pay
+                  Online</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12" style="padding: 0 10px 20px 10px;">
+          <!-- Static Table Start -->
+          <div class="static-table-area">
+            <div class="container-fluid">
+              <div class="row">
+
+                <div class="sparkline8-list">
+                  <div class="sparkline8-hd">
+                    <div class="main-sparkline8-hd">
+                      <h1>Course Outline</h1>
+                    </div>
+                  </div>
+                  <div class="sparkline8-graph">
+                    <div class="static-table-list table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>Outline</th>
+                            <th>Facilitator</th>
+                            <th>Lecture Date</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                          </tr>
+                        </thead>
+                        <tbody *ngIf="session.time_table?.length > 0">
+                          <tr *ngFor="let tt of session.time_table;let i = index">
+                            <td>{{ i + 1}}</td>
+                            <td>{{ tt.name }}</td>
+                            <td>{{ tt.facilitator }}</td>
+                            <td>{{ tt.date }}</td>
+                            <td>{{ tt.start_time }}</td>
+                            <td>{{ tt.end_time }}</td>
+                          </tr>
+                        </tbody>
+                        <tbody *ngIf="session.time_table?.length == 0">
+                          <td colspan="6" style="text-align: center; font-weight: bolder;">Data not available at the
+                            moment...</td>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <!-- Static Table End -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

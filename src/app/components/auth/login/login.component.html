@@ -1,0 +1,43 @@
+<div class="color-line"></div>
+<div class="container-fluid" style="margin-top: 7%;">
+  <div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"></div>
+    <div class="col-md-4 col-md-4 col-sm-4 col-xs-12">
+      <div class="text-center m-b-md custom-login">
+        <img src="assets/img/logo.png" alt="" style="width: 150px; height: auto;padding-bottom: 10px;">
+        <h3>Login</h3>
+        <p>Please enter you email and password to login. </p>
+      </div>
+      <div class="hpanel" style="margin-top: 5%;">
+        <div class="panel-body">
+          <form id="loginForm"  [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+            <div class="form-group">
+              <label class="control-label" for="username">Email</label>
+              <input type="email" id="username"  formControlName="email" placeholder="example@domain.com" title="Please enter your email"  name="email" autocomplete="off" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+              <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">Email is required</div>
+                <div *ngIf="f.email.errors.pattern">Please fill in your valid email</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="password">Password</label>
+              <input type="password" formControlName="password" title="Please enter your password" placeholder="******" name="password" autocomplete="off"  id="password" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+              <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                <div *ngIf="f.password.errors.required">Password is required</div>
+              </div>
+            </div>
+            <button  type="submit" class="btn btn-success btn-block loginbtn">Login</button>
+            <a class="btn btn-default btn-block" routerLink="/register" >Register</a>
+            <a class="btn btn-default btn-block" routerLink="/forgot-password" >Forgot Password</a>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"></div>
+  </div>
+  <div class="row" style="margin-top: 50px;">
+    <div class="col-md-12 col-md-12 col-sm-12 col-xs-12 text-center">
+      <p>Copyright &copy; {{year}} <a href="https://dlaonline.org/">Daystar Leadrship Academy</a> All rights reserved.</p>
+    </div>
+  </div>
+</div>

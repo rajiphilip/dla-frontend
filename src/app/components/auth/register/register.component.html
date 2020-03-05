@@ -1,0 +1,172 @@
+<div class="color-line"></div>
+<div class="container-fluid"  style="margin-top: 7%;">
+  <div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
+    <div class="col-md-6 col-md-6 col-sm-6 col-xs-12">
+      <div class="text-center custom-login">
+        <img src="assets/img/logo.png" alt="" style="width: 150px; height: auto;padding-bottom: 10px;">
+        <h3>Registration</h3>
+        <p>Please select account type and fill all required fields. </p>
+      </div>
+      <div class="hpanel">
+        <div class="panel-body">
+          <form id="loginForm"   [formGroup]="registerForm" (ngSubmit)="submitRegister()">
+            <div class="row">
+              <div class="form-group col-lg-12">
+                <label  class="control-label"  for="account_type">Account Type</label>
+                <select class="form-control" name="account_type"  id="account_type" formControlName="accountType"
+                        (change)="checkSeletedType($event.target.value)" [ngClass]="{ 'is-invalid': submitted && f.accountType.errors }">
+                  <option value="">Choose Account Type</option>
+                  <option [value]="item.id" *ngFor="let item of accountTypes">{{item.name}}</option>
+                </select>
+                <div *ngIf="submitted && f.accountType.errors" class="invalid-feedback">
+                  <div *ngIf="f.accountType.errors.required">Account type is required</div>
+                </div>
+              </div>
+              <div *ngIf="!isTeenager">
+                <div class="form-group  col-lg-12">
+                  <label class="control-label" for="lastname">Surname</label>
+                  <input type="text" id="lastname"  formControlName="lastname" placeholder="Lastname" title="Please enter your surname"  name="lastname" autocomplete="off" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }">
+                  <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
+                    <div *ngIf="f.lastname.errors.required">Surname is required</div>
+                  </div>
+                </div>
+                <div class="form-group  col-lg-12">
+                  <label class="control-label" for="firstname">Firstname</label>
+                  <input type="text" id="firstname"  formControlName="firstname" placeholder="Firstname" title="Please enter your firstname"  name="firstname" autocomplete="off" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }">
+                  <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
+                    <div *ngIf="f.firstname.errors.required">Firstname is required</div>
+                  </div>
+                </div>
+                <div class="form-group  col-lg-12">
+                  <label class="control-label" for="othername">Othername</label>
+                  <input type="text" id="othername"  formControlName="othername" placeholder="Othername" title="Please enter your othername"  name="othername" autocomplete="off" class="form-control">
+                </div>
+                <div class="form-group col-lg-6">
+                  <label class="control-label"  for="gender">Gender</label>
+                  <select class="form-control" name="gender" id="gender" formControlName="gender"  [ngClass]="{ 'is-invalid': submitted && f.gender.errors }">
+                    <option value="">Gender</option>
+                    <option value="MALE">MALE</option>
+                    <option value="FEMALE">FEMALE</option>
+                  </select>
+                    <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
+                    <div *ngIf="f.gender.errors.required">Gender is required</div>
+                  </div>
+                </div>
+                <div class="form-group col-lg-6">
+                  <label  class="control-label" for="marital_status">Marital Status</label>
+                  <select class="form-control"  formControlName="marital_status" name="marital_status" id="marital_status"  [ngClass]="{ 'is-invalid': submitted && f.marital_status.errors }">
+                    <option value="">Marital Status</option>
+                    <option value="MARRIED">MARRIED</option>
+                    <option value="SINGLE">SINGLE</option>
+                  </select>
+                  <div *ngIf="submitted && f.marital_status.errors" class="invalid-feedback">
+                    <div *ngIf="f.marital_status.errors.required">Marital Status is required</div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="isTeenager">
+                <div class="form-group  col-lg-12">
+                  <label class="control-label" for="guardian_firstname">Guardian Firstname</label>
+                  <input type="text" id="guardian_firstname"  formControlName="firstname" placeholder="Guardian Firstname" title="Please enter Guardian firstname"  name="firstname" autocomplete="off" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }">
+                  <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
+                    <div *ngIf="f.firstname.errors.required">Guardian Firstname is required</div>
+                  </div>
+                </div>
+                <div class="form-group  col-lg-12">
+                  <label class="control-label" for="guardian_lastname">Guardian Surname</label>
+                  <input type="text" id="guardian_lastname"  formControlName="lastname" placeholder="Guardian Lastname" title="Please enter Guardian surname"  name="lastname" autocomplete="off" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }">
+                  <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
+                    <div *ngIf="f.lastname.errors.required">Guardian Surname is required</div>
+                  </div>
+                </div>
+                <div class="form-group col-lg-12">
+                  <label class="control-label"  for="genderTeen">Gender</label>
+                  <select class="form-control" name="gender" id="genderTeen" formControlName="gender"  [ngClass]="{ 'is-invalid': submitted && f.gender.errors }">
+                    <option value="">Gender</option>
+                    <option value="MALE">MALE</option>
+                    <option value="FEMALE">FEMALE</option>
+                  </select>
+                  <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
+                    <div *ngIf="f.gender.errors.required">Gender is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group  col-lg-12">
+                <label class="control-label" for="phone_number">Mobile</label>
+                <input type="tel" id="phone_number"  formControlName="phone_number" placeholder="234**********" title="Please enter your phone number"  name="phone_number" autocomplete="off" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.phone_number.errors }">
+                <div *ngIf="submitted && f.phone_number.errors" class="invalid-feedback">
+                  <div *ngIf="f.phone_number.errors.required">Phone number is required</div>
+                  <div *ngIf="f.phone_number.errors.minlength">Phone number must be at least 10 characters</div>
+                  <div *ngIf="f.phone_number.errors.pattern">Please fill in your valid phone number</div>
+                </div>
+              </div>
+              <div class="form-group  col-lg-12">
+                <label class="control-label" for="dob">Date of Birth</label>
+                <mat-form-field style="width: 100%">
+                  <input matInput [matDatepicker]="picker1" formControlName="date_of_birth" id="dob"
+                         (dateChange)="addEvent('change', 'dob', $event,  $event)">
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+                <div *ngIf="submitted && f.date_of_birth.errors" class="invalid-feedback">
+                  <div *ngIf="f.date_of_birth.errors.required">Date of Birth is required</div>
+                </div>
+              </div>
+              <div class="form-group  col-lg-12">
+                <label class="control-label" for="address">Address</label>
+                <textarea id="address"  formControlName="residence_address" placeholder="Address" title="Please enter your firstname" rows="3"  name="residence_address" autocomplete="off" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.residence_address.errors }"></textarea>
+                <div *ngIf="submitted && f.residence_address.errors" class="invalid-feedback">
+                  <div *ngIf="f.residence_address.errors.required">Address is required</div>
+                </div>
+              </div>
+              <div class="form-group  col-lg-12">
+                <label class="control-label" for="country">Country</label>
+                <select class="form-control" name="country"  id="country"  formControlName="country"  [ngClass]="{ 'is-invalid': submitted && f.country.errors }">
+                  <option value="">Select Country</option>
+                  <option value="Nigeria">Nigeria</option><option value="Albania">Albania</option><option value="Algeria">Algeria</option><option value="Andorra">Andorra</option><option value="Angola">Angola</option><option value="Antigua and Barbuda">Antigua and Barbuda</option><option value="Argentina">Argentina</option><option value="Armenia">Armenia</option><option value="Australia">Australia</option><option value="Austria">Austria</option><option value="Azerbaijan">Azerbaijan</option><option value="The Bahamas">The Bahamas</option><option value="Bahrain">Bahrain</option><option value="Bangladesh">Bangladesh</option><option value="Barbados">Barbados</option><option value="Belarus">Belarus</option><option value="Belgium">Belgium</option><option value="Belize">Belize</option><option value="Benin">Benin</option><option value="Bhutan">Bhutan</option><option value="Bolivia">Bolivia</option><option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option><option value="Botswana">Botswana</option><option value="Burundi">Burundi</option><option value="Cabo Verde">Cabo Verde</option><option value="Cameroon">Cameroon</option><option value="Central African Republic (CAR)">Central African Republic (CAR)</option><option value="Chad">Chad</option><option value="Comoros">Comoros</option><option value="Democratic Republic of the Congo">Democratic Republic of the Congo</option><option value="Republic of the Congo">Republic of the Congo</option><option value="Cote d'Ivoire">Cote d'Ivoire</option><option value="Djibouti">Djibouti</option><option value="Egypt">Egypt</option><option value="Equatorial Guinea">Equatorial Guinea</option><option value="Eritrea">Eritrea</option><option value="Eswatini (formerly Swaziland)">Eswatini (formerly Swaziland)</option><option value="Ethiopia">Ethiopia</option><option value="Gabon">Gabon</option><option value="Gambia">Gambia</option><option value="Ghana">Ghana</option><option value="Guinea">Guinea</option><option value="Guinea-Bissau">Guinea-Bissau</option><option value="Kenya">Kenya</option><option value="Lesotho">Lesotho</option><option value="Liberia">Liberia</option><option value="Libya">Libya</option><option value="Madagascar">Madagascar</option><option value="Malawi">Malawi</option><option value="Mali">Mali</option><option value="Mauritania">Mauritania</option><option value="Mauritius">Mauritius</option><option value="Morocco">Morocco</option><option value="Mozambique">Mozambique</option><option value="Namibia">Namibia</option><option value="Niger">Niger</option><option value="Rwanda">Rwanda</option><option value="Sao Tome and Principe">Sao Tome and Principe</option><option value="Senegal">Senegal</option><option value="Seychelles">Seychelles</option><option value="Sierra Leone">Sierra Leone</option><option value="Somalia">Somalia</option><option value="Senegal">Senegal</option><option value="South Africa">South Africa</option><option value="South Sudan">South Sudan</option><option value="Sudan">Sudan</option><option value="Swaziland (renamed to Eswatini)">Swaziland (renamed to Eswatini)</option><option value="Seychelles">Seychelles</option><option value="Tanzania">Tanzania</option><option value="Togo">Togo</option><option value="Djibouti">Djibouti</option><option value="South Africa">South Africa</option><option value="South Sudan">South Sudan</option>
+                </select>
+                <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
+                  <div *ngIf="f.country.errors.required">Country is required</div>
+                </div>
+              </div>
+              <div class="form-group  col-lg-12">
+                <label class="control-label" for="username">Email</label>
+                <input type="email" id="username"  formControlName="email" placeholder="example@domain.com" title="Please enter your email"  name="email" autocomplete="off" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                  <div *ngIf="f.email.errors.required">Email is required</div>
+                  <div *ngIf="f.email.errors.pattern">Please fill in your valid email</div>
+                </div>
+              </div>
+              <div class="form-group col-lg-6">
+                <label class="control-label"  for="password">Password</label>
+                <input type="password" formControlName="password" title="Please enter your password" placeholder="******" name="password" autocomplete="off"  id="password" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                  <div *ngIf="f.password.errors.required">Password is required</div>
+                </div>
+              </div>
+              <div class="form-group col-lg-6">
+                <label  class="control-label" for="confirmPassword">Confirm Password</label>
+                <input type="password" formControlName="confirmPassword" title="Please confirm your password" placeholder="******" name="password" autocomplete="off" id="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+                <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                  <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+                  <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+                </div>
+              </div>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-success  btn-block  loginbtn">Register</button>
+              <a class="btn btn-default btn-block" routerLink="/login" >Login</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
+  </div>
+  <div class="row" style="margin-top: 50px;">
+    <div class="col-md-12 text-center">
+      <p>Copyright &copy; {{year}} <a href="https://dlaonline.org/">Daystar Leadrship Academy</a> All rights reserved.</p>
+    </div>
+  </div>
+</div>

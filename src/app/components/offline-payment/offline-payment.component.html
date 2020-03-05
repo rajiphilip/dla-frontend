@@ -1,0 +1,55 @@
+<h4 class="display-4 text-center">Have you already made payment to the bank(Teller/Bank Transfer)? Please provide us
+  with the Teller Number and Payment date.</h4>
+<hr>
+<form [formGroup]="tellerForm" (ngSubmit)="onSubmit()" autocomplete="off">
+  <div class="form-group">
+    <label>Teller Number/Reference Number</label>
+    <input type="text" class="form-control" formControlName="tellerNo" name="tellerNo" id="tellerNo"
+      [ngClass]="{ 'is-invalid': submitted && f.tellerNo.errors }" />
+    <div *ngIf="submitted && f.tellerNo.errors" class="invalid-feedback">
+      <div *ngIf="f.tellerNo.errors.required">Teller Number/Reference Number is required</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Payment Date</label>
+    <mat-form-field style="width: 100%">
+      <input matInput [matDatepicker]="picker" formControlName="paymentDate"
+        (dateChange)="addEvent('change', 'paymentDate', $event,  $event)">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <div *ngIf="submitted && f.paymentDate.errors" class="invalid-feedback">
+      <div *ngIf="f.paymentDate.errors.required">Payment Date is required</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Paid By</label>
+    <input type="text" class="form-control" formControlName="paidBy" name="paidBy" id="paidBy"
+      [ngClass]="{ 'is-invalid': submitted && f.paidBy.errors }" />
+    <div *ngIf="submitted && f.paidBy.errors" class="invalid-feedback">
+      <div *ngIf="f.paidBy.errors.required">Paid By is required</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Amount</label>
+    <input type="text" class="form-control" formControlName="amount" name="amount" id="amount"
+      [ngClass]="{ 'is-invalid': submitted && f.amount.errors }" />
+    <div *ngIf="submitted && f.amount.errors" class="invalid-feedback">
+      <div *ngIf="f.amount.errors.required">Amount is required</div>
+      <div *ngIf="f.amount.errors.pattern"> Please fill in your valid amount</div>
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary btn-sm pull-right">
+      <i class="fa fa-paper-plane"></i>
+      Submit
+    </button>
+    <button type="button" class="btn btn-outline-dark ml-1 pull-left" [mat-dialog-close]><i class="fa fa-close"></i>
+      Close
+    </button>
+  </div>
+</form>
